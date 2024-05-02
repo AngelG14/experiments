@@ -1,0 +1,4 @@
+jax
+jaxlib
+py-experimenter
+numpyro

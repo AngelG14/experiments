@@ -1,0 +1,25 @@
+[build-system]
+requires = [
+    "setuptools >= 65",
+    "wheel >= 0.38",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["lcpfn"]
+
+[project]
+name = "lcpfn"
+version = "0.0.1"
+dependencies = [
+    "torch==1.11.0",
+    "numpy>=1.21.2"
+]
+description = "A small example package"
+readme = "readme.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]

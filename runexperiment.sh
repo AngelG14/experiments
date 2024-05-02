@@ -1,3 +1,2 @@
-source ./naiveautoml/.env/bin/activate
-cd ./naiveautoml/experiments/
-python runexperiment.py
+source .env/bin/activate
+python experiment/run_experiment.py

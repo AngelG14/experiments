@@ -8,9 +8,8 @@ import sklearn
 
 def run_ex(parameters: dict, result_processor: ResultProcessor, custom_config: dict):
     start_time = time.time()
-    seed = parameters['seed']
     X, y = get_dataset(parameters['dataset_id'])
-    X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, train_size=0.8, random_state=seed)
+    X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, train_size=0.8)
     automl = NaiveAutoML(evaluation_fun=parameters['eval_func'])
     automl.fit(X_train, y_train)
     y_predict = automl.predict(X_test)
@@ -21,6 +20,6 @@ def run_ex(parameters: dict, result_processor: ResultProcessor, custom_config: d
     result_processor.process_results({'end_time': end_time})
     result_processor.process_results({'run_time': run_time})
     result_processor.process_results({'pipeline': str(automl.chosen_model)})
+    result_processor.process_results({'metric': automl.scoring})
     result_processor.process_results({'score': score})
     result_processor.process_results({'history': automl.history.to_json()})
- 

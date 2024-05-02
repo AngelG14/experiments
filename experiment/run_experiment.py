@@ -1,5 +1,9 @@
 from experiment_execution import run_ex
+from py_experimenter.experimenter import PyExperimenter
 import logging
+import os
+
+file_path = os.path.split(__file__)[0]
 
 
 def initialize_loggers(naiveautoml_level=None, lccv_level=None):
@@ -38,12 +42,16 @@ def initialize_loggers(naiveautoml_level=None, lccv_level=None):
         lccv_logger.addHandler(file_handler2)
         elm_logger.addHandler(file_handler2)
 
+
 if __name__ == '__main__':
 
-    configuration_path = os.path.split(__file__)[0]+'/configuration.conf'
+    configuration_path = file_path+'/config/experiment_configuration.cfg'
     experimenter = PyExperimenter(
         experiment_configuration_file_path=configuration_path,
         name='example',
         use_codecarbon=False
     )
-    initialize_experiments(experimenter=experimenter)
+    experimenter.execute(
+        experiment_function=run_ex,
+        random_order=False
+    )
