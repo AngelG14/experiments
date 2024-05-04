@@ -1,6 +1,7 @@
 from py_experimenter.experimenter import PyExperimenter
 import os
 import pandas as pd
+from experiment_utils import get_dataset
 
 file_path = os.path.split(__file__)[0]
 
@@ -13,6 +14,7 @@ def initialize_experiments(experimenter):
     dataset_id = []
     for id in df["openmlid"]:
         dataset_id.append(int(id))
+        get_dataset(id)
     experimenter.fill_table_from_combination(
         parameters={
             "dataset_id": dataset_id,
