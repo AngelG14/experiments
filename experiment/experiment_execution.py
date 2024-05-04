@@ -10,7 +10,7 @@ def run_ex(parameters: dict, result_processor: ResultProcessor, custom_config: d
     start_time = time.time()
     X, y = get_dataset(parameters['dataset_id'])
     X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, train_size=0.8)
-    automl = NaiveAutoML(evaluation_fun=parameters['eval_func'])
+    automl = NaiveAutoML(evaluation_fun=parameters['eval_func'], scoring="neg_log_loss")
     automl.fit(X_train, y_train)
     y_predict = automl.predict(X_test)
     score = precision_score(y_test, y_predict, average='micro')

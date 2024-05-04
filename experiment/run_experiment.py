@@ -51,6 +51,7 @@ if __name__ == '__main__':
         name='example',
         use_codecarbon=False
     )
+    initialize_loggers(naiveautoml_level="INFO", lccv_level="INFO")
     experimenter.execute(
         experiment_function=run_ex,
         random_order=False
