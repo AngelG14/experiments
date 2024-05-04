@@ -18,17 +18,30 @@ def initialize_loggers(naiveautoml_level=None, lccv_level=None):
 
     if naiveautoml_level is not None:
 
+        # Console handler
+        naiveautoml_ch = logging.StreamHandler()
+        naiveautoml_ch.setLevel(logger_levels[naiveautoml_level])
+        naiveautoml_ch.setFormatter(formatter)
+
         # NaiveAutoML Logger
-        logger = logging.getLogger('naiveautoml')
-        logger.setLevel(logger_levels[naiveautoml_level])
+        naiveautoml_logger = logging.getLogger('naiveautoml')
+        naiveautoml_logger.setLevel(logger_levels[naiveautoml_level])
 
         # File Handler
-        naiveautoml_file_handler = logging.FileHandler('naiveautoml.log')
-        naiveautoml_file_handler.setLevel(logger_levels[naiveautoml_level])
-        naiveautoml_file_handler.setFormatter(formatter)
-        logger.addHandler(naiveautoml_file_handler)
+        # naiveautoml_file_handler = logging.FileHandler('naiveautoml.log')
+        # naiveautoml_file_handler.setLevel(logger_levels[naiveautoml_level])
+        # naiveautoml_file_handler.setFormatter(formatter)
+        # naiveautoml_logger.addHandler(naiveautoml_file_handler)
+
+        naiveautoml_logger.addHandler(naiveautoml_ch)
 
     if lccv_level is not None:
+
+        # Console handler
+        lccv_ch = logging.StreamHandler()
+        lccv_ch.setLevel(logger_levels[naiveautoml_level])
+        lccv_ch.setFormatter(formatter)
+
         # LCCV Logger
         lccv_logger = logging.getLogger("lccv")
         lccv_logger.setLevel(logger_levels[lccv_level])
@@ -36,11 +49,14 @@ def initialize_loggers(naiveautoml_level=None, lccv_level=None):
         elm_logger.setLevel(logger_levels[lccv_level])
 
         # File handler
-        file_handler2 = logging.FileHandler('lccv.log')
-        file_handler2.setLevel(logger_levels[lccv_level])
-        file_handler2.setFormatter(formatter)
-        lccv_logger.addHandler(file_handler2)
-        elm_logger.addHandler(file_handler2)
+        # file_handler2 = logging.FileHandler('lccv.log')
+        # file_handler2.setLevel(logger_levels[lccv_level])
+        # file_handler2.setFormatter(formatter)
+        # lccv_logger.addHandler(file_handler2)
+        # elm_logger.addHandler(file_handler2)
+
+        lccv_logger.addHandler(lccv_ch)
+        elm_logger.addHandler(lccv_ch)
 
 
 if __name__ == '__main__':
