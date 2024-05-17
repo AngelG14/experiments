@@ -12,13 +12,15 @@ def initialize_experiments(experimenter):
     df = pd.read_csv(database_path, sep=";")
     eval_func = ['kfold_5', 'lccv-80', 'mccv_5', "lce", "pfn"]
     dataset_id = []
+    seeds = list(range(10))
     for id in df["openmlid"]:
         dataset_id.append(int(id))
         get_dataset(id)
     experimenter.fill_table_from_combination(
         parameters={
             "dataset_id": dataset_id,
-            "eval_func": eval_func
+            "eval_func": eval_func,
+            "seed": seeds
         }
     )
     print(experimenter.get_table())
